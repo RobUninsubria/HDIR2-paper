@@ -1,0 +1,83 @@
+
+\begin{lstlisting}[language=Python, caption={Semantic TCP packet encoding for ARNN input}]
+import pandas as pd
+from rdflib import Graph, Namespace, URIRef, Literal
+from rdflib.namespace import RDF
+
+# Simulate an RDF graph with TCP packets
+g = Graph()
+NS = Namespace("http://example.org/network#")
+
+# Define RDF triples (Wireshark-style)
+triples = [
+    (NS.packet1, RDF.type, NS.TCPPacket),
+    (NS.packet1, NS.srcIP, Literal("192.168.1.10")),
+    (NS.packet1, NS.dstIP, Literal("10.0.0.5")),
+    (NS.packet1, NS.flag, Literal("SYN")),
+
+    (NS.packet2, RDF.type, NS.TCPPacket),
+    (NS.packet2, NS.srcIP, Literal("10.0.0.5")),
+    (NS.packet2, NS.dstIP, Literal("192.168.1.10")),
+    (NS.packet2, NS.flag, Literal("SYN-ACK")),
+
+    (NS.packet3, RDF.type, NS.TCPPacket),
+    (NS.packet3, NS.srcIP, Literal("192.168.1.11")),
+    (NS.packet3, NS.dstIP, Literal("10.0.0.5")),
+    (NS.packet3, NS.flag, Literal("SYN")),
+]
+
+for t in triples:
+    g.add(t)
+
+# Extract: build src_ip $\times$ dst_ip $\times$ flag matrix
+data = []
+for s, p, o in g.triples((None, NS.flag, None)):
+    src = g.value(subject=s, predicate=NS.srcIP)
+    dst = g.value(subject=s, predicate=NS.dstIP)
+    flag = str(o)
+    data.append((str(src), str(dst), flag))
+
+# Convert to DataFrame
+df = pd.DataFrame(data, columns=["src_ip", "dst_ip", "flag"])
+
+# One-hot encode IPs and flag
+src_encoded = pd.get_dummies(df["src_ip"], prefix="src")
+dst_encoded = pd.get_dummies(df["dst_ip"], prefix="dst")
+flag_encoded = pd.get_dummies(df["flag"], prefix="flag")
+
+# Final vectors for ARNN input
+input_vectors = pd.concat([src_encoded, dst_encoded, flag_encoded], axis=1)
+
+# Display the result
+import ace_tools as tools; tools.display_dataframe_to_user(
+    name="ARNN Input Vectors", dataframe=input_vectors)
+\end{lstlisting}
+
+\begin{lstlisting}
+import pandas as pd
+from rdflib import Graph, Namespace, Literal, RDF
+import numpy as np
+
+# 1. Load a single flow ---------------------------------------------------
+row = (pd.read_excel("Syn_ridotto.xlsx", header=None)
+         .iloc[1, 0]                       # second CSV line as raw string
+         .split(',')[:8])                  # split 88 comma‑separated fields
+src_ip, dst_ip, flag = row[2], row[4], row[6]  # simplified field selection
+
+# 2. Serialise as RDF -----------------------------------------------------
+NS   = Namespace("http://example.org/net#")
+g    = Graph()
+flow = NS[f"flow_{row[0]}"]
+
+g.add((flow, RDF.type, NS.TCPFlow))
+g.add((flow, NS.srcIP, Literal(src_ip)))
+g.add((flow, NS.dstIP, Literal(dst_ip)))
+g.add((flow, NS.flag,  Literal(flag)))
+
+# 3. One‑hot vector for ARNN --------------------------------------------
+DICT = {v: i for i, v in enumerate(sorted({src_ip, dst_ip, flag}))}
+vec  = np.zeros(len(DICT), dtype=int)
+vec[DICT[src_ip]] = vec[DICT[dst_ip]] = vec[DICT[flag]] = 1
+print(vec)
+\end{lstlisting}
+\end{center}
