@@ -9,20 +9,13 @@ git clone https://github.com/RobUninsbria/paper2.git
 cd paper2
 git lfs pull            # scarica i dataset di esempio e i checkpoint
 
-# 2. (Opzionale) Imposta le variabili d’ambiente – vedi .env.example
-cp .env.example .env
-
-# 3A. Esegui l’intero stack in Docker (Spark + Jupyter + servizi di test)
-docker compose pull      # scarica le immagini pre‑buildate
-docker compose up -d     # avvia in background
-
-# 3B. …oppure lancia un singolo esperimento dallo script helper
+# 2. lancia un singolo esperimento dallo script helper
 bash scripts/run_syn_flood.sh          # ↳ Sezione 4.1 del paper
 bash scripts/run_dao_dio.sh            # ↳ Sezione 4.2
 bash scripts/run_ntp_amplification.sh  # ↳ Sezione 4.3
 
-# 4. Apri il notebook di validazione dual‑scalability
+# 3. Apri il notebook di validazione dual‑scalability
 #    (porta predefinita Jupyter: http://localhost:8888)
-firefox http://localhost:8888/notebooks/notebooks/stress_test.ipynb
+firefox (https://github.com/RobUninsbria/paper2/blob/main/stress_test) 
 
 
