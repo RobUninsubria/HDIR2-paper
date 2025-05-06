@@ -19,3 +19,5 @@ bash scripts/run_ntp_amplification.sh  # ↳ Section 4.3
 #    (default Jupyter port: http://localhost:8888)
 firefox http://localhost:8888/notebooks/stress_test.ipynb
 firefox (https://github.com/RobUninsbria/paper2/blob/main/stress_test)
+
+![immagine](https://github.com/user-attachments/assets/6a381dc8-feea-49c6-870f-1a7ba0005210)
