@@ -21,4 +21,4 @@ firefox http://localhost:8888/notebooks/stress_test.ipynb
 firefox (https://github.com/RobUninsbria/paper2/blob/main/stress_test)
 
 
-**/notebooks/** – Jupyter notebooks that reproduce some experiments; they include inline functions for data conversion, entropy metrics, and ARNN inference, so no extra modules are needed.
+**/notebooks/** – Jupyter notebooks that reproduce  experiments; they include inline functions for data conversion, entropy metrics, and ARNN inference, so no extra modules are needed.
