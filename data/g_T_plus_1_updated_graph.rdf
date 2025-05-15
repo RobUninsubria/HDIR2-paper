@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:ns1="http://example.org/hdir/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://example.org/hdir/host_0">
+    <ns1:hasRiskScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.812</ns1:hasRiskScore>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/hdir/host_4">
+    <ns1:hasRiskScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.747</ns1:hasRiskScore>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/hdir/host_2">
+    <ns1:hasRiskScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.92</ns1:hasRiskScore>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/hdir/host_8">
+    <ns1:hasRiskScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.88</ns1:hasRiskScore>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/hdir/host_3">
+    <ns1:hasRiskScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.88</ns1:hasRiskScore>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/hdir/host_6">
+    <ns1:hasRiskScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.717</ns1:hasRiskScore>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/hdir/host_9">
+    <ns1:hasRiskScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.912</ns1:hasRiskScore>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/hdir/host_7">
+    <ns1:hasRiskScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.96</ns1:hasRiskScore>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/hdir/host_5">
+    <ns1:hasRiskScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.747</ns1:hasRiskScore>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/hdir/host_1">
+    <ns1:hasRiskScore rdf:datatype="http://www.w3.org/2001/XMLSchema#float">0.985</ns1:hasRiskScore>
+  </rdf:Description>
+</rdf:RDF>
